@@ -32,7 +32,6 @@ class Game
       if turn.type == :basic
         winner = turn.winner
         turn.pile_cards
-        # turn.spoils_of_war.shuffle
         cards_to_winner = turn.spoils_of_war.count
         turn.award_spoils(winner)
 
@@ -40,7 +39,6 @@ class Game
       elsif turn.type == :war
         winner = turn.winner
         turn.pile_cards
-        # turn.spoils_of_war.shuffle
         cards_to_winner = turn.spoils_of_war.count
         turn.award_spoils(winner)
 

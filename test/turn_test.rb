@@ -88,7 +88,7 @@ class TurnTest < Minitest::Test
 
   def test_pile_cards_method_sends_top_three_cards_from_each_players_deck_to_spoils_of_war_when_turn_type_is_war
     @war_turn.pile_cards
-    # assert_equal [@card1, @card4, @card2, @card3, @card5, @card6], @war_turn.spoils_of_war
+
     assert @war_turn.spoils_of_war.include?(@card1)
     assert @war_turn.spoils_of_war.include?(@card4)
     assert @war_turn.spoils_of_war.include?(@card2)
@@ -98,8 +98,7 @@ class TurnTest < Minitest::Test
     assert_equal 6, @war_turn.spoils_of_war.count
   end
 
-# simplify this name!!!
-  def test_pile_cards_method_removes_top_three_cards_from_each_players_deck_without_adding_them_to_spoils_of_war_when_turn_type_is_mutually_assured_destruction
+  def test_pile_cards_method_removes_top_three_cards_from_each_players_deck_and_from_play_when_turn_type_is_mutually_assured_destruction
     @mad_turn.pile_cards
 
     assert_empty @mad_turn.spoils_of_war
@@ -113,14 +112,13 @@ class TurnTest < Minitest::Test
     @basic_turn.pile_cards
     @basic_turn.award_spoils(winner)
 
-    # assert_equal [@card2, @card5, @card8, @card1, @card3], @basic_turn_player1.deck.cards
     assert @basic_turn_player1.deck.cards.include?(@card2)
     assert @basic_turn_player1.deck.cards.include?(@card5)
     assert @basic_turn_player1.deck.cards.include?(@card8)
     assert @basic_turn_player1.deck.cards.include?(@card1)
     assert @basic_turn_player1.deck.cards.include?(@card3)
     assert_equal 5, @basic_turn_player1.deck.cards.count
-    # assert_equal [@card4, @card6, @card7], @basic_turn_player2.deck.cards
+
     assert @basic_turn_player2.deck.cards.include?(@card4)
     assert @basic_turn_player2.deck.cards.include?(@card6)
     assert @basic_turn_player2.deck.cards.include?(@card7)
@@ -137,7 +135,7 @@ class TurnTest < Minitest::Test
     @war_turn.award_spoils(winner)
 
     assert_equal [@card8], @war_turn_player1.deck.cards
-    # assert_equal [@card7, @card1, @card4, @card2, @card3, @card5, @card6], @war_turn_player2.deck.cards
+
     assert @war_turn_player2.deck.cards.include?(@card7)
     assert @war_turn_player2.deck.cards.include?(@card1)
     assert @war_turn_player2.deck.cards.include?(@card4)
