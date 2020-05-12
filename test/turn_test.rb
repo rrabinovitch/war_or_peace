@@ -88,7 +88,14 @@ class TurnTest < Minitest::Test
 
   def test_pile_cards_method_sends_top_three_cards_from_each_players_deck_to_spoils_of_war_when_turn_type_is_war
     @war_turn.pile_cards
-    assert_equal [@card1, @card4, @card2, @card3, @card5, @card6], @war_turn.spoils_of_war
+    # assert_equal [@card1, @card4, @card2, @card3, @card5, @card6], @war_turn.spoils_of_war
+    assert @war_turn.spoils_of_war.include?(@card1)
+    assert @war_turn.spoils_of_war.include?(@card4)
+    assert @war_turn.spoils_of_war.include?(@card2)
+    assert @war_turn.spoils_of_war.include?(@card3)
+    assert @war_turn.spoils_of_war.include?(@card5)
+    assert @war_turn.spoils_of_war.include?(@card6)
+    assert_equal 6, @war_turn.spoils_of_war.count
   end
 
 # simplify this name!!!
@@ -106,8 +113,19 @@ class TurnTest < Minitest::Test
     @basic_turn.pile_cards
     @basic_turn.award_spoils(winner)
 
-    assert_equal [@card2, @card5, @card8, @card1, @card3], @basic_turn_player1.deck.cards
-    assert_equal [@card4, @card6, @card7], @basic_turn_player2.deck.cards
+    # assert_equal [@card2, @card5, @card8, @card1, @card3], @basic_turn_player1.deck.cards
+    assert @basic_turn_player1.deck.cards.include?(@card2)
+    assert @basic_turn_player1.deck.cards.include?(@card5)
+    assert @basic_turn_player1.deck.cards.include?(@card8)
+    assert @basic_turn_player1.deck.cards.include?(@card1)
+    assert @basic_turn_player1.deck.cards.include?(@card3)
+    assert_equal 5, @basic_turn_player1.deck.cards.count
+    # assert_equal [@card4, @card6, @card7], @basic_turn_player2.deck.cards
+    assert @basic_turn_player2.deck.cards.include?(@card4)
+    assert @basic_turn_player2.deck.cards.include?(@card6)
+    assert @basic_turn_player2.deck.cards.include?(@card7)
+
+    assert_equal 3, @basic_turn_player2.deck.cards.count
 
     assert_empty @basic_turn.spoils_of_war
   end
@@ -119,7 +137,15 @@ class TurnTest < Minitest::Test
     @war_turn.award_spoils(winner)
 
     assert_equal [@card8], @war_turn_player1.deck.cards
-    assert_equal [@card7, @card1, @card4, @card2, @card3, @card5, @card6], @war_turn_player2.deck.cards
+    # assert_equal [@card7, @card1, @card4, @card2, @card3, @card5, @card6], @war_turn_player2.deck.cards
+    assert @war_turn_player2.deck.cards.include?(@card7)
+    assert @war_turn_player2.deck.cards.include?(@card1)
+    assert @war_turn_player2.deck.cards.include?(@card4)
+    assert @war_turn_player2.deck.cards.include?(@card2)
+    assert @war_turn_player2.deck.cards.include?(@card3)
+    assert @war_turn_player2.deck.cards.include?(@card5)
+    assert @war_turn_player2.deck.cards.include?(@card6)
+    assert_equal 7, @war_turn_player2.deck.cards.count
 
     assert_empty @war_turn.spoils_of_war
   end
